@@ -33,4 +33,4 @@ jobs:
       - name: echo a string
         run: Write-Output "Windows string"
       - name: tree
-        run: tree
+        run: trees
