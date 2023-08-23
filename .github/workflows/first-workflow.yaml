@@ -14,3 +14,14 @@ jobs:
         run: |
           node -v
           npm -v
+  run-parallel-jobs:
+    name: Run Shell On Mac
+    runs-on: macos-latest
+    steps:
+      - name: echo a string
+        run: echo "Hello World from mac"
+      - name: Multi-line Command
+        run: |
+          node -v
+          npm -v
+      
