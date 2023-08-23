@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: echo a string
-        run: echo "Hello World"
+        run: whoami
       - name: Multline Command
         run: |
           node -v
@@ -32,5 +32,5 @@ jobs:
     steps:
       - name: echo a string
         run: Write-Output "Windows string"
-      - name: Error
-        run: cause error
+      - name: tree
+        run: tree
