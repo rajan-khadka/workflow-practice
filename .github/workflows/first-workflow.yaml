@@ -24,4 +24,13 @@ jobs:
         run: |
           node -v
           npm -v
-      
+
+  dependent-jobs:
+    name: Run on windows
+    runs-on: windows-latest
+    needs: [run-shell-commands]
+    steps:
+      - name: echo a string
+        run: Write-Output "Windows string"
+      - name: Error
+        run: cause error
