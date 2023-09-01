@@ -4,33 +4,62 @@ on:
   - push
 
 jobs:
-  run-shell-commands:
-    name: Run Shell Commands
+  merge_notifier:
+    name: Merge Notification
     runs-on: ubuntu-latest
     steps:
-      - name: echo a string
-        run: whoami
-      - name: Multline Command
-        run: |
-          node -v
-          npm -v
-  run-parallel-jobs:
-    name: Run Shell On Mac
-    runs-on: macos-latest
-    steps:
-      - name: echo a string
-        run: echo "Hello World from mac"
-      - name: Multi-line Command
-        run: |
-          node -v
-          npm -v
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v7
 
-  dependent-jobs:
-    name: Run on windows
-    runs-on: windows-latest
-    needs: [run-shell-commands]
-    steps:
-      - name: echo a string
-        run: Write-Output "Windows string"
-      - name: tree
-        run: trees
+      - name:  Post Google Chat Message
+        run: |
+          curl --location --request POST '${{ secrets.GCHAT }}' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+              "cards": [
+                  {
+                    "header": {
+                        "title": "Merge",
+                        "subtitle": Merged on ${{ steps.branch-name.outputs.base_ref_branch }}
+                    },
+                    "sections": [
+                        {
+                            "widgets": [
+                                {
+                                    "keyValue": {
+                                        "topLabel": "Creator",
+                                        "content": "${{ github.event.pusher.username }}"
+                                    },
+                                  },
+                                  {
+                                    "keyValue": {
+                                        "topLabel": "Repository Name",
+                                        "content": "${{ github.event.repository.name }}"
+                                    }
+                                  },
+                                  {
+                                    "keyValue": {
+                                        "topLabel": "Merge Branch",
+                                        "content": "From ${{ steps.branch-name.outputs.current_branch }} branch To ${{ steps.branch-name.outputs.base_ref_branch }} branch"
+                                    }
+                                  },
+                                  {
+                                    "keyValue": {
+                                        "topLabel": "Merge Commit",
+                                        "content": "${{ github.event.head_commit }}"
+                                    }
+                                  },
+                                {
+                                  "keyValue": {
+                                      "topLabel": "You are welcome in advance, ${{ github.event.pusher.username }}.",
+                                      "content": "Embrace the upcoming alterations in the NightWeb API APP with delight.\n Wishing you a productive and joyful development process!🫡"
+                                  }
+                                },
+                            ]
+                        }
+                    ],
+                  }
+              ]
+          }'
+    
