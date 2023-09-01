@@ -26,7 +26,7 @@ jobs:
                   {
                     "header": {
                         "title": "Merge",
-                        "subtitle": "Commit Message #$GITHUB_OUTPUT"
+                        "subtitle": "Commit Message #${GITHUB_OUTPUT}"
                     },
                     "sections": [
                         {
