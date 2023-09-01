@@ -20,8 +20,7 @@ jobs:
               "cards": [
                   {
                     "header": {
-                        "title": "Merge",
-                        "subtitle": Merged on ${{ steps.branch-name.outputs.base_ref_branch }}
+                        "title": "Merge"
                     },
                     "sections": [
                         {
