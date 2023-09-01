@@ -23,7 +23,7 @@ jobs:
                   {
                     "header": {
                         "title": "Merge",
-                        "subtitle": "subtitle"
+                        "subtitle": "Commit Message #${{ github.event.head_commit.message }}"
                     },
                     "sections": [
                         {
@@ -31,7 +31,7 @@ jobs:
                                 {
                                     "keyValue": {
                                         "topLabel": "Creator",
-                                        "content": ${{ github.event.pusher.name }}
+                                        "content": "${{ github.event.pusher.name }}"
                                     },
                                   },
                                   {
@@ -42,13 +42,13 @@ jobs:
                                   },
                                   {
                                     "keyValue": {
-                                        "topLabel": "Merge Commit",
-                                        "content": "merge"
+                                        "topLabel": "Merged Branch",
+                                        "content": "${{ steps.branch-name.outputs.base_ref_branch }} branch"
                                     }
                                   },
                                 {
                                   "keyValue": {
-                                      "topLabel": "You are welcome in advance, user.",
+                                      "topLabel": "You are welcome in advance, ${{ github.event.pusher.name }}.",
                                       "content": "Embrace the upcoming alterations in the NightWeb API APP with delight.\n Wishing you a productive and joyful development process!🫡"
                                   }
                                 },
