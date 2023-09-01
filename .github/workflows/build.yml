@@ -81,7 +81,7 @@ jobs:
                                   {
                                     "keyValue": {
                                         "topLabel": "You are welcome in advance, ${{ github.event.pull_request.user.login }}.",
-                                        "content": "Embrace the upcoming alterations in the NightWeb API APP with delight.\n Wishing you a productive and joyful development process!🫡"
+                                        "content": "Thanks for your valuable Pull Request to ${{ steps.branch-name.outputs.base_ref_branch }} branch.\nYour dedication and expertise greatly contribute to our project's success.🫡"
                                     }
                                   },
                               ]

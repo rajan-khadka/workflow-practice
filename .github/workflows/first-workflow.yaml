@@ -22,7 +22,7 @@ jobs:
                   {
                     "header": {
                         "title": "Merge",
-                        "subtitle": "Commit Message - ${{ github.event.head_commit.message }} "
+                        "subtitle": "Commit Message #${{ github.event.head_commit.message }}"
                     },
                     "sections": [
                         {
@@ -48,7 +48,7 @@ jobs:
                                 {
                                   "keyValue": {
                                       "topLabel": "You are welcome in advance, ${{ github.event.pusher.name }}.",
-                                      "content": "Embrace the upcoming alterations in the NightWeb API APP with delight.\n Wishing you a productive and joyful development process!🫡"
+                                      "content": "Grateful for successful feature push to ${{ github.ref_name }} branch.\nThanks to the collaborative effort and dedication of our team.🫡"
                                   }
                                 },
                             ]
