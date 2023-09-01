@@ -31,7 +31,7 @@ jobs:
                                 {
                                     "keyValue": {
                                         "topLabel": "Creator",
-                                        "content": "${{ github.event.pusher.username.login }}"
+                                        "content": "merge"
                                     },
                                   },
                                   {
@@ -43,12 +43,12 @@ jobs:
                                   {
                                     "keyValue": {
                                         "topLabel": "Merge Commit",
-                                        "content": "${{ github.event.head_commit }}"
+                                        "content": "merge"
                                     }
                                   },
                                 {
                                   "keyValue": {
-                                      "topLabel": "You are welcome in advance, ${{ github.event.pusher.username.login }}.",
+                                      "topLabel": "You are welcome in advance, user.",
                                       "content": "Embrace the upcoming alterations in the NightWeb API APP with delight.\n Wishing you a productive and joyful development process!🫡"
                                   }
                                 },
