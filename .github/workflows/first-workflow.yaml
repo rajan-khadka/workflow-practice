@@ -22,7 +22,7 @@ jobs:
                   {
                     "header": {
                         "title": "Merge",
-                        "subtitle": "Commit Message - ${{ github.event.head_commit.message }}"
+                        "subtitle": "Commit Message - ${{ github.event.head_commit.message }} "
                     },
                     "sections": [
                         {
