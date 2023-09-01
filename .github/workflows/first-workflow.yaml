@@ -1,7 +1,9 @@
 name: First Work
 
 on:
-  - push
+  push: 
+    branches: [ master ]
+  
 
 jobs:
   merge_notifier:
