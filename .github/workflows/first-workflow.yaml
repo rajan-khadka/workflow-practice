@@ -10,14 +10,8 @@ jobs:
     name: Merge Notification
     runs-on: ubuntu-latest
     steps:
-
-      - uses: actions/checkout@v2
-      - uses: tonynguyenit18/github-action-custom-vars@v1
-      - run: echo $RECENT_MERGED_BRANCH_NAME
-      
-      - name: Get branch name
-        id: branch-name
-        uses: tj-actions/branch-names@v7
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - name:  Post Google Chat Message
         run: |
@@ -48,7 +42,7 @@ jobs:
                                   {
                                     "keyValue": {
                                         "topLabel": "Merged Branch",
-                                        "content": "${{ steps.branch-name.outputs.base_ref_branch }} branch"
+                                        "content": "${{ github.ref_name }} branch"
                                     }
                                   },
                                 {
