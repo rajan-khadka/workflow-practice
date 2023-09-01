@@ -13,9 +13,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Logging
+      - name: Logging Commits
         run: |
-          echo "$(git log -1 --no-merges --pretty=%B)"
+          echo "title=$(git log --format=%B -n 1 HEAD | head -n 1)" >> $GITHUB_OUTPUT
 
       - name:  Post Google Chat Message
         run: |
@@ -26,7 +26,7 @@ jobs:
                   {
                     "header": {
                         "title": "Merge",
-                        "subtitle": "Commit Message #${{ github.event.head_commit.message }}"
+                        "subtitle": "Commit Message #$GITHUB_OUTPUT"
                     },
                     "sections": [
                         {
