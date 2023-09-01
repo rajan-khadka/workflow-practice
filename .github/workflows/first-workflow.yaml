@@ -15,7 +15,7 @@ jobs:
 
       - name: Logging Commits
         run: |
-          echo "title=$(git log --format=%B -n 1 HEAD | head -n 1)" >> $GITHUB_OUTPUT
+          echo "commit=$(git log --format=%B -n 1 HEAD | head -n 1)" >> $GITHUB_ENV
 
       - name:  Post Google Chat Message
         run: |
@@ -26,7 +26,7 @@ jobs:
                   {
                     "header": {
                         "title": "Merge",
-                        "subtitle": "Commit Message #${GITHUB_OUTPUT}"
+                        "subtitle": "Commit Message #${{ env.commit }}"
                     },
                     "sections": [
                         {
