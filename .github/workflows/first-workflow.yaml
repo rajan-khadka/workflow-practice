@@ -13,6 +13,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Logging
+        run: |
+          echo "${{ toJSON(github.event.head_commit) }}"
+
       - name:  Post Google Chat Message
         run: |
           curl --location --request POST '${{ secrets.GCHAT }}' \
