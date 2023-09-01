@@ -10,6 +10,8 @@ jobs:
     name: Merge Notification
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+      
       - name: Get branch name
         id: branch-name
         uses: tj-actions/branch-names@v7
