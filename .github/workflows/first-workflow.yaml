@@ -25,7 +25,7 @@ jobs:
               "cards": [
                   {
                     "header": {
-                        "title": "Merge",
+                        "title": "Pull Request Successfully Merged.",
                         "subtitle": "Commit Message #${{ env.commit }}"
                     },
                     "sections": [
