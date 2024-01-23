@@ -1,0 +1,32 @@
+#!/bin/bash
+
+pull_request() {
+    local to_branch="$1"
+    if [ -z $to_branch ]; then
+        to_branch="master"
+    fi
+
+    local access_token="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"
+
+    local root_endpoint="https://api.github.com"
+    local origin=$(git config --get remote.origin.url)
+    local user=$(echo "$origin" | sed -e 's/.*[\/:]\([^/]*\)\/[^/]*$/\1/')
+    local repo=$(basename "$(git rev-parse --show-toplevel)")
+    local from_branch=$(git rev-parse --abbrev-ref HEAD)
+
+    local api_url="${root_endpoint}/repos/${user}/${repo}/pulls"
+
+    curl -i \
+    -H "Authorization: token ${access_token}" \
+    -H "Accept: application/vnd.github.v3+json" \
+    -d '{
+        "title": "Amazing new feature",
+        "body": "Please pull this in!",
+        "head": "'"${from_branch}"'",
+        "base": "'"${to_branch}"'"
+      }' \
+    -L "$api_url"
+
+}
+
+pull_request "$@"
