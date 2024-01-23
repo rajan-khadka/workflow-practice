@@ -1,10 +1,68 @@
 #!/bin/bash
 
+# Default values
+source=""
+target=""
+file=""
+
+#Read the content of .env into a variable
+envContent=$(cat .env)
+
+# Parse command-line options
+ARGS=$(getopt -o "s:t:f:" --long "source:,target:,file:" -n "pr-creator.sh" -- "$@")
+
+if [ $? -ne 0 ]; then
+    echo "Error parsing options."
+    exit 1
+fi
+
+eval set -- "$ARGS"
+
+while true; do
+    case "$1" in
+        -s|--source)
+            shift
+            source="$1"
+            ;;
+        -t|--target)
+            shift
+            target="$1"
+            ;;
+        -f|--file)
+            shift
+            file="$1"
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            echo "Internal error!"
+            exit 1
+            ;;
+    esac
+    shift
+done;
+
+
+if [ -z "$source" ]; then
+    source=$(git rev-parse --abbrev-ref HEAD)
+fi;
+
+if [ -z "$target" ]; then
+    echo "target flag is must required";
+    exit 1;
+fi;
+
+echo $source;
+echo $target;
+echo $file;
+
 pull_request() {
-    local to_branch="$1"
-    if [ -z $to_branch ]; then
-        to_branch="master"
-    fi
+    # local to_branch="$1"
+    # if [ -z $to_branch ]; then
+    #     to_branch="master"
+    # fi
 
     local access_token="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"
 
@@ -12,7 +70,7 @@ pull_request() {
     local origin=$(git config --get remote.origin.url)
     local user=$(echo "$origin" | sed -e 's/.*[\/:]\([^/]*\)\/[^/]*$/\1/')
     local repo=$(basename "$(git rev-parse --show-toplevel)")
-    local from_branch=$(git rev-parse --abbrev-ref HEAD)
+    # local from_branch=$(git rev-parse --abbrev-ref HEAD)
 
     local api_url="${root_endpoint}/repos/${user}/${repo}/pulls"
 
@@ -22,11 +80,11 @@ pull_request() {
     -d '{
         "title": "Amazing new feature",
         "body": "Please pull this in!",
-        "head": "'"${from_branch}"'",
-        "base": "'"${to_branch}"'"
+        "head": "'"${source}"'",
+        "base": "'"${target}"'"
       }' \
     -L "$api_url"
 
 }
 
-pull_request "$@"
+# pull_request "$@"
